@@ -1,0 +1,36 @@
+:root {
+  --primario: #0b1641;
+  --secundario: #c70160;
+  --sucesso: #16857b;
+  --texto: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial,
+    Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container-fluid {
+  padding-left: 130px;
+  padding-right: 130px;
+}
+
+body {
+  background: linear-gradient(
+    45deg,
+    var(--primario) 0%,
+    var(--secundario) 100%
+  );
+  background-attachment: fixed;
+  color: var(--texto);
+}
+
+@media only screen and (max-width: 768px) {
+  .container-fluid {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
