@@ -45,7 +45,7 @@ export default {
   methods: {
     getPercentDiscount(savings) {
       const number = parseInt(savings)
-      return number > 0 ? number + '%' : 'Grátis'
+      return number > 0 ? '-' + number + '%' : 'Grátis'
     },
 
     replaceImg(id) {
@@ -71,7 +71,7 @@ export default {
   font-style: normal;
   font-weight: 300;
   font-size: 24px;
-  line-height: 28px;
+  line-height: 33px;
 }
 
 .buttons-and-prices {
