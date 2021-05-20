@@ -6,22 +6,24 @@
           <b-icon icon="search" />
         </b-input-group-text>
         <b-form-input
+          v-model="search"
           class="text-search filters-text"
           placeholder="Procurar"
           type="text"
+          @input="applySearch"
         />
       </b-input-group>
     </div>
     <div class="col-5 col-md-8">
       <div class="filter-dropdown-box float-right">
         <label class="filter-dropdown-label"> Ordenar por: </label>
-        <b-dropdown class="filter-select filters-text" :text="selected">
+        <b-dropdown class="filter-select filters-text" :text="selected.label">
           <b-dropdown-item
-            v-for="item in options"
-            :key="item"
+            v-for="(item, index) in options"
+            :key="index"
             @click="selectFilter(item)"
           >
-            {{ item }}
+            {{ item.label }}
           </b-dropdown-item>
         </b-dropdown>
       </div>
@@ -34,14 +36,33 @@ export default {
   name: 'DefaultFilters',
   data() {
     return {
-      selected: '% de Desconto',
-      options: ['% de Desconto', 'Maior preço', 'Menor preço', 'Título'],
+      search: '',
+      awaitingSeach: false,
+      selected: { label: '% de Desconto', value: 'Savings', desc: 0 },
+      options: [
+        { label: '% de Desconto', value: 'Savings', desc: 0 },
+        { label: 'Maior preço', value: 'Price', desc: 1 },
+        { label: 'Menor preço', value: 'Price', desc: 0 },
+        { label: 'Título', value: 'Title', desc: 0 },
+      ],
     }
   },
 
   methods: {
     selectFilter(filter) {
       this.selected = filter
+      this.$emit('change-sort')
+    },
+
+    applySearch() {
+      this.$emit('loading')
+      if (!this.awaitingSearch) {
+        setTimeout(() => {
+          this.$emit('search-change')
+          this.awaitingSearch = false
+        }, 3000)
+      }
+      this.awaitingSearch = true
     },
   },
 }
