@@ -18,7 +18,7 @@
     </div>
     <div class="row mt-4 mb-4">
       <div class="col-12">
-        <button class="btn btn-load" @click="loadMore" :disabled="loading">
+        <button class="btn btn-load" :disabled="loading" @click="loadMore">
           Carregar mais
         </button>
       </div>
@@ -74,7 +74,9 @@ export default {
           }
           this.loading = false
         })
-        .catch(console.error)
+        .catch(() => {
+          return 'Tratamento de erro'
+        })
     },
 
     loadMore() {
